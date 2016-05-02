@@ -1,0 +1,74 @@
+set terminal postscript enhanced eps color lw 1.5 22 font "Times-Roman"
+set output "./FIGS/FIG1b_kRec_zD-0.5_Na51.eps"
+
+dat1 = '<grep "k " ../kRec_a00.1_zD-0.5_rTs0.04_Na51.dat'
+dat2 = '<grep "k " ../kRec_a00.1_zD-0.5_rTs0.06_Na51.dat'
+dat3 = '<grep "k " ../kRec_a00.1_zD-0.5_rTs0.10_Na51.dat'
+
+set label 100 "(b)" right at screen 0.045,0.68
+
+set label 1 "{/Times-Italic c}{/Symbol D}{/Symbol t} [cm]" right at screen 0.82,0.04
+set label 2 "{/Helvetica K} [s]" rotate by 90 right at screen 0.025,0.62
+set label 3 "{/Times-Italic N} = 51" at screen 0.56,0.48
+set label 103 "{/Times-Roman=100 DRAFT}" at screen 0.43,0.4 center rotate by 25 tc "grey" front 
+
+LW=1.
+set style line 1 lw LW lt 1 lc rgb "#AA0000" dashtype 1
+set style line 2 lw LW lt 1 lc rgb "#0000AA" dashtype 1
+set style line 3 lw LW lt 1 lc rgb "black" dashtype "-"
+set style line 4 lw LW lt 1 lc rgb "grey" dashtype "."
+set style rect fc lt -1 fs solid 0.15 noborder 
+set style rect fc lt -1 fs solid 0.15 noborder 
+
+set key samplen 1.5 at graph 1.17,0.99 reverse Left spacing 1.2
+set xr [0.0:0.07]
+set yr [0.01:200]
+set tics nomirror
+set xzeroaxis
+set logs y
+set format y "10^{%L}"
+set ytics (0.01,0.1,1,10,100)
+
+
+set size 0.85,0.7
+set multiplot 
+
+set lmargin at screen 0.12
+set rmargin at screen 0.82
+
+set bmargin at screen 0.08
+set tmargin at screen 0.68
+set xtics (0.0,0.025, 0.05) 
+
+
+p dat1 u ($2):($3) w l ls 3 dashtype 1 t "{/Helvetica K}({/Symbol D}{/Symbol t})"\
+, dat1 u ($2):(($5>0)?($5):(0.0001)) w l ls 3 dashtype "." t "{/Helvetica K}_{/=14 eff}({/Symbol D}{/Symbol t}) - {/Times-Italic R} = 0.04 cm"\
+, dat2 u ($2):(($5>0)?($5):(0.0001)) w l ls 3 dashtype "-" t "{/Helvetica K}_{/=14 eff}({/Symbol D}{/Symbol t}) - {/Times-Italic R} = 0.06 cm"\
+
+unset label 1
+unset label 2
+unset label 3
+unset label 100
+
+
+set lmargin at screen 0.17
+set rmargin at screen 0.46
+set bmargin at screen 0.16
+set tmargin at screen 0.46
+
+set xr [0.015:0.16]
+set yr [1:10.]
+set tics out
+set xtics (0.04,0.08,0.12,0.16) offset 0.,0.3 font "Times-Roman,20"
+set format y "%g"
+set ytics (1,2,4,8) offset 0.3,0. font "Times-Roman,20"
+set label 201 "{/Times-Italic R}" at graph 0.94,0.1
+set label 202 "{/Times-Italic s(R)}" at graph -0.1,1.1
+
+set border 1+2
+
+p '../ssq_R.dat' u 1:2 w lp ls 3 dashtype 1 pt 7 notitle
+
+
+unset multiplot
+# EOF: .gpi

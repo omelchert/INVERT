@@ -1,0 +1,48 @@
+set terminal postscript enhanced eps color lw 1.5 22 font "Times-Roman"
+set output "./FIGS/FIG1a_kRec_zD-0.5.eps"
+
+dat1 = '<grep "m50 " ../kRec_a00.1_zD-0.5_rTs0.06_Na51.dat'
+dat2 = '<grep "m50 " ../kRec_a00.1_zD-0.5_rTs0.06_Na11.dat'
+dat3 = '<grep "m50 " ../kRec_a00.1_zD-0.5_rTs0.06_Na5.dat'
+
+set label 100 "(a)" right at screen 0.045,0.68
+
+set label 1 "{/Times-Italic c}{/Symbol t} [cm]" right at screen 0.82,0.04
+set label 2 "{/Times-Italic p} [a.u.]" rotate by 90 right at screen 0.025,0.62
+set label 3 "{/Times-Italic z}_{/=14 D} = -0.50 cm \n{/Times-Italic R} = 0.06 cm" at screen 0.6,0.35
+set label 103 "{/Times-Roman=100 DRAFT}" at screen 0.43,0.4 center rotate by 25 tc "grey" front 
+
+LW=1.
+set style line 1 lw LW lt 1 lc rgb "#AA0000" dashtype 1
+set style line 2 lw LW lt 1 lc rgb "#0000AA" dashtype 1
+set style line 3 lw LW lt 1 lc rgb "black" dashtype "-"
+set style line 4 lw LW lt 1 lc rgb "grey" dashtype "."
+set style rect fc lt -1 fs solid 0.15 noborder 
+set style rect fc lt -1 fs solid 0.15 noborder 
+
+set key samplen 1.5 at graph 1.1,0.96 reverse Left invert spacing 1.2
+set xr [-0.025:0.20]
+set yr [-0.2:1.1]
+set ytics ("" -0.2,"" 0., "" 0.2, "" 0.4, "" 0.6, "" 0.8, "" 1.0)
+set tics nomirror
+set xzeroaxis
+unset x2tics
+
+set lmargin at screen 0.12
+set rmargin at screen 0.82
+set size 0.85,0.7
+
+set bmargin at screen 0.08
+set tmargin at screen 0.68
+set xtics (0.0, 0.05, 0.1,  0.15 ) 
+
+set obj 21 rect from 0.0, graph 0 to 0.1, graph 1 fc "#AAAAAA" behind
+
+N = 24.
+p dat1 u ($3):($6/N) w l ls 1 dashtype "-" t "{/Times-Italic p}_{/Times-Roman=14 PL}({/Symbol t}) - {/Times-Italic N}=51"\
+, dat2 u ($3):($6/N) w l ls 1 dashtype "-." t "{/Times-Italic p}_{/Times-Roman=14 PL}({/Symbol t}) - {/Times-Italic N}=11"\
+, dat3 u ($3):($6/N) w l ls 1 dashtype "-.." t "{/Times-Italic p}_{/Times-Roman=14 PL}({/Symbol t}) - {/Times-Italic N}=5"\
+, dat1 u ($3):($5/N) w l ls 2 dashtype 1 t "{/Times-Italic p}_{/Times-Roman=14 D}({/Symbol t})"\
+, dat1 u ($3):($4/N) w l ls 3 dashtype 1 t "{/Times-Italic p}_{/Times-Roman=14 0}({/Symbol t})"\
+
+# EOF: .gpi

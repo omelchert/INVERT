@@ -1,0 +1,28 @@
+set terminal postscript enhanced eps color lw 1.5 24 font "Times-Roman"
+set output "./FIGS/Fig1.eps"
+
+set label 100 "(a)" right at screen 0.13,0.8
+set label 103 "{/Times-Roman=100 DRAFT}" at screen 0.43,0.4 center rotate by 25 tc "grey" front 
+
+set pm3d
+set hidden3
+unset surface
+
+set view 40,60
+set zr [-1:1.2]
+set yr [-0.05:0.15]
+set xr [0:2.2]
+unset colorbox
+set ticslevel 0
+unset key
+set ytics offset 0.2,-0.2
+
+set ztics ("" -1, "" -0.5, "" 0., "" 0.5, "" 1.0)
+
+set xlabel "{/Times-Italic D}" rotate parallel offset -1.0,-1.0
+set ylabel "{/Times-Italic c}{/Symbol t} {/Times-Roman [cm]}" rotate parallel offset 1.0,-0.5
+set zlabel "&{shiftmore}{/Times-Italic p} {/Times-Roman [a.u.]}" rotate parallel offset 5.0
+
+set palette defined (-2 "light-red", -1 "dark-red", 0 "dark-grey", 1. "dark-blue", 2 "light-blue")
+sp '../diffTrafo_a00.1.dat' u 2:3:4 
+
